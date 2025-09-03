@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, MapPin } from "lucide-react";
 
 export function Experience() {
   const experiences = [
@@ -10,11 +10,11 @@ export function Experience() {
       location: "San Francisco, CA",
       period: "2022 - Present",
       description:
-        "Lead development of scalable web applications serving 100K+ users. Architected microservices infrastructure and mentored junior developers.",
+        "Lead development of scalable web applications serving 100K+ users. Architected micro-services and mentored juniors.",
       achievements: [
-        "Reduced application load time by 40% through optimization",
-        "Led team of 5 developers on major product redesign",
-        "Implemented CI/CD pipeline reducing deployment time by 60%",
+        "Reduced load time by 40 % through optimization",
+        "Led 5-developer team on major product redesign",
+        "CI/CD pipeline cut deployment time by 60 %",
       ],
       technologies: ["React", "Node.js", "AWS", "PostgreSQL", "Docker"],
     },
@@ -24,11 +24,11 @@ export function Experience() {
       location: "Austin, TX",
       period: "2020 - 2022",
       description:
-        "Developed MVP and scaled platform from 0 to 50K users. Built responsive web applications and RESTful APIs.",
+        "Built MVP and scaled platform from 0 to 50 K users. Implemented responsive UIs and robust REST APIs.",
       achievements: [
-        "Built entire frontend from scratch using React",
-        "Designed and implemented user authentication system",
-        "Integrated payment processing with Stripe",
+        "React SPA from scratch with 95 % Lighthouse score",
+        "JWT auth & role-based access control",
+        "Stripe integration handling $500k+ revenue",
       ],
       technologies: ["React", "Express", "MongoDB", "Stripe", "Heroku"],
     },
@@ -38,81 +38,91 @@ export function Experience() {
       location: "Remote",
       period: "2019 - 2020",
       description:
-        "Created responsive websites and web applications for various clients. Collaborated with designers to implement pixel-perfect UIs.",
+        "Delivered pixel-perfect websites for 20+ clients; improved performance & established reusable component library.",
       achievements: [
-        "Delivered 20+ client projects on time and budget",
-        "Improved website performance scores by average 35%",
-        "Established component library for team efficiency",
+        "Average 35 % faster load times across projects",
+        "Reusable Vue component library adopted by 6 teams",
+        "Perfect Lighthouse scores on 90 % of launches",
       ],
       technologies: ["Vue.js", "SCSS", "WordPress", "Figma", "Git"],
     },
-  ]
+  ];
 
   return (
-    <section id="experience" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-24 bg-slate-950">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Professional Experience</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
-            A journey of growth, learning, and delivering impactful solutions across different industries and team
-            environments.
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-400">
+            Professional Experience
+          </h2>
+          <p className="mt-4 text-slate-400 max-w-2xl mx-auto">
+            A journey of growth, learning, and delivering impactful solutions
+            across industries and team environments.
           </p>
         </div>
 
+        {/* Timeline */}
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-px top-0 bottom-0 w-0.5 bg-border"></div>
+          {/* vertical line */}
+          <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-700 md:left-1/2 md:-translate-x-1/2" />
 
-          <div className="space-y-12">
-            {experiences.map((exp, index) => (
+          <div className="space-y-16">
+            {experiences.map((exp, i) => (
               <div
-                key={index}
-                className={`relative flex items-center ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+                key={i}
+                className="relative flex items-start md:items-center"
               >
-                {/* Timeline dot */}
-                <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 w-3 h-3 bg-primary rounded-full border-4 border-background z-10"></div>
+                {/* dot */}
+                <div className="absolute left-4 top-2 w-3 h-3 rounded-full bg-sky-400 ring-4 ring-slate-950 z-10 md:left-1/2 md:-translate-x-1/2" />
 
-                {/* Content */}
-                <div className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
-                  <Card className="group hover:shadow-lg transition-all duration-300">
+                {/* content card */}
+                <div
+                  className={`ml-14 md:w-1/2 md:ml-0 ${i % 2 === 0 ? "md:pr-10" : "md:pl-10 md:ml-auto"}`}
+                >
+                  <Card className="bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-sky-400/40 transition-all">
                     <CardHeader>
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-                        <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                        <CardTitle className="text-xl font-semibold text-slate-100">
                           {exp.title}
                         </CardTitle>
-                        <div className="flex items-center text-sm text-muted-foreground">
-                          <Calendar className="h-4 w-4 mr-1" />
+                        <div className="flex items-center text-sm text-slate-400 shrink-0">
+                          <Calendar className="h-4 w-4 mr-1 text-sky-400" />
                           {exp.period}
                         </div>
                       </div>
-                      <div className="space-y-1">
-                        <h4 className="font-semibold text-lg text-accent">{exp.company}</h4>
-                        <div className="flex items-center text-sm text-muted-foreground">
-                          <MapPin className="h-4 w-4 mr-1" />
-                          {exp.location}
-                        </div>
+                      <p className="text-lg font-medium text-sky-300">{exp.company}</p>
+                      <div className="flex items-center text-sm text-slate-400">
+                        <MapPin className="h-4 w-4 mr-1 text-sky-400" />
+                        {exp.location}
                       </div>
                     </CardHeader>
+
                     <CardContent>
-                      <p className="text-muted-foreground mb-4 leading-relaxed">{exp.description}</p>
+                      <p className="text-slate-300 mb-4 leading-relaxed">{exp.description}</p>
 
                       <div className="mb-4">
-                        <h5 className="font-semibold mb-2">Key Achievements:</h5>
-                        <ul className="space-y-1">
-                          {exp.achievements.map((achievement, achIndex) => (
-                            <li key={achIndex} className="text-sm text-muted-foreground flex items-start">
-                              <span className="text-primary mr-2 mt-1">•</span>
-                              {achievement}
+                        <h5 className="font-semibold text-sm text-slate-200 mb-2">Key Achievements</h5>
+                        <ul className="space-y-1.5">
+                          {exp.achievements.map((ach, idx) => (
+                            <li key={idx} className="text-sm text-slate-400 flex items-start">
+                              <span className="text-sky-400 mr-2 mt-1">•</span>
+                              {ach}
                             </li>
                           ))}
                         </ul>
                       </div>
 
                       <div>
-                        <h5 className="font-semibold mb-2">Technologies:</h5>
+                        <h5 className="font-semibold text-sm text-slate-200 mb-2">Technologies</h5>
                         <div className="flex flex-wrap gap-2">
-                          {exp.technologies.map((tech, techIndex) => (
-                            <Badge key={techIndex} variant="secondary" className="text-xs">
+                          {exp.technologies.map((tech) => (
+                            <Badge
+                              key={tech}
+                              variant="outline"
+                              className="border-slate-700 text-slate-300 text-xs
+                                         hover:bg-sky-400/20 hover:border-sky-400/60"
+                            >
                               {tech}
                             </Badge>
                           ))}
@@ -126,36 +136,42 @@ export function Experience() {
           </div>
         </div>
 
-        {/* Education Section */}
-        <div className="mt-20 pt-16 border-t border-border">
-          <h3 className="text-2xl font-bold text-center mb-12">Education & Certifications</h3>
+        {/* Education & Certs */}
+        <div className="mt-24 pt-16 border-t border-slate-800">
+          <h3 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-400 mb-10">
+            Education & Certifications
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <CardTitle className="text-lg">Bachelor of Computer Science</CardTitle>
-                <p className="text-muted-foreground">University of Technology • 2015-2019</p>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Graduated Magna Cum Laude with focus on Software Engineering and Web Development.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <CardTitle className="text-lg">AWS Certified Solutions Architect</CardTitle>
-                <p className="text-muted-foreground">Amazon Web Services • 2023</p>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Professional certification in designing distributed systems on AWS platform.
-                </p>
-              </CardContent>
-            </Card>
+            {[
+              {
+                title: "Bachelor of Computer Science",
+                meta: "University of Technology • 2015 – 2019",
+                note: "Magna Cum Laude, focus on Software Engineering & Web Dev",
+              },
+              {
+                title: "AWS Certified Solutions Architect",
+                meta: "Amazon Web Services • 2023",
+                note: "Professional cert in distributed-system design on AWS",
+              },
+            ].map((edu) => (
+              <Card
+                key={edu.title}
+                className="bg-slate-900/50 border border-slate-800 rounded-2xl"
+              >
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-slate-100">
+                    {edu.title}
+                  </CardTitle>
+                  <p className="text-sm text-sky-300">{edu.meta}</p>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-slate-400">{edu.note}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

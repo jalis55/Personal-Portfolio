@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export function Skills() {
   const skillCategories = [
@@ -19,34 +19,44 @@ export function Skills() {
       title: "Mobile & Other",
       skills: ["React Native", "Flutter", "Firebase", "Supabase", "Stripe", "Socket.io", "REST APIs", "Microservices"],
     },
-  ]
+  ];
 
   return (
-    <section id="skills" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-24 bg-slate-950">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Skills & Technologies</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
-            A comprehensive toolkit built through years of hands-on experience and continuous learning in the
-            ever-evolving tech landscape.
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-400">
+            Skills & Technologies
+          </h2>
+          <p className="mt-4 text-slate-400 max-w-2xl mx-auto">
+            A comprehensive toolkit forged through years of hands-on experience
+            and continuous learning in the ever-evolving tech landscape.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {skillCategories.map((category, index) => (
-            <Card key={index} className="group hover:shadow-lg transition-all duration-300">
+        {/* 4 skill cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {skillCategories.map(({ title, skills }) => (
+            <Card
+              key={title}
+              className="bg-slate-900/50 border border-slate-800 rounded-2xl 
+                         hover:border-sky-400/40 transition-all duration-300"
+            >
               <CardHeader>
-                <CardTitle className="text-xl text-primary group-hover:text-accent transition-colors duration-300">
-                  {category.title}
+                <CardTitle className="text-lg font-semibold text-slate-100">
+                  {title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, skillIndex) => (
+                  {skills.map((skill) => (
                     <Badge
-                      key={skillIndex}
-                      variant="secondary"
-                      className="hover:bg-primary hover:text-primary-foreground transition-colors duration-200 cursor-default"
+                      key={skill}
+                      variant="outline"
+                      className="border-slate-700 text-slate-300 
+                                 hover:bg-sky-400/20 hover:border-sky-400/60 
+                                 hover:text-sky-300 transition-all duration-200"
                     >
                       {skill}
                     </Badge>
@@ -57,30 +67,32 @@ export function Skills() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-lg p-8">
-            <h3 className="text-2xl font-bold mb-4">Always Learning</h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Technology evolves rapidly, and so do I. Currently exploring AI/ML integration, Web3 technologies, and
-              advanced cloud architectures to stay ahead of the curve.
+        {/* Always Learning block */}
+        <div className="mt-20 max-w-3xl mx-auto">
+          <div className="bg-slate-900/40 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 md:p-10 text-center">
+            <h3 className="text-2xl font-bold text-slate-100 mb-4">
+              Always Learning
+            </h3>
+            <p className="text-slate-400 mb-6">
+              Technology evolves rapidly—and so do I. Currently exploring
+              AI/ML integration, Web3 technologies, and advanced cloud
+              architectures to stay ahead of the curve.
             </p>
             <div className="flex flex-wrap justify-center gap-2">
-              <Badge variant="outline" className="border-primary text-primary">
-                AI/ML
-              </Badge>
-              <Badge variant="outline" className="border-primary text-primary">
-                Web3
-              </Badge>
-              <Badge variant="outline" className="border-primary text-primary">
-                Kubernetes
-              </Badge>
-              <Badge variant="outline" className="border-primary text-primary">
-                Rust
-              </Badge>
+              {["AI/ML", "Web3", "Kubernetes", "Rust"].map((tag) => (
+                <Badge
+                  key={tag}
+                  variant="outline"
+                  className="border-sky-400 text-sky-400 
+                             hover:bg-sky-400/20 transition-colors"
+                >
+                  {tag}
+                </Badge>
+              ))}
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
