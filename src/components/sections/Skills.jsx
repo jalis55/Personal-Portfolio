@@ -5,21 +5,27 @@ export function Skills() {
   const skillCategories = [
     {
       title: "Frontend",
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vue.js", "HTML5", "CSS3", "JavaScript"],
+      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "JavaScript.js", "HTML5", "CSS3"],
     },
     {
       title: "Backend",
-      skills: ["Node.js", "Express", "Python", "Django", "PostgreSQL", "MongoDB", "Redis", "GraphQL"],
+      skills: ["Python", "Django","Flask","FastApi","PostgreSQL", "MongoDB", "Redis", "Celry"],
     },
     {
       title: "DevOps & Tools",
-      skills: ["Docker", "AWS", "Vercel", "Git", "GitHub Actions", "Jest", "Cypress", "Figma"],
+      skills: ["Docker", "Git", "GitHub Actions", ],
     },
-    {
-      title: "Mobile & Other",
-      skills: ["React Native", "Flutter", "Firebase", "Supabase", "Stripe", "Socket.io", "REST APIs", "Microservices"],
-    },
+    // {
+    //   title: "Mobile & Other",
+    //   skills: ["React Native", "Firebase", "Supabase", "Stripe", "Socket.io", "REST APIs", "Microservices"],
+    // },
   ];
+  const learingSkills=[
+    "AI/ML", 
+    "Data Engineering",
+     "Kubernetes",
+     "Aws"
+  ]
 
   return (
     <section id="skills" className="py-24 bg-slate-950">
@@ -75,11 +81,11 @@ export function Skills() {
             </h3>
             <p className="text-slate-400 mb-6">
               Technology evolves rapidly—and so do I. Currently exploring
-              AI/ML integration, Web3 technologies, and advanced cloud
+              AI/ML integration, Data Analysis and advanced cloud
               architectures to stay ahead of the curve.
             </p>
             <div className="flex flex-wrap justify-center gap-2">
-              {["AI/ML", "Web3", "Kubernetes", "Rust"].map((tag) => (
+              {learingSkills.map((tag) => (
                 <Badge
                   key={tag}
                   variant="outline"

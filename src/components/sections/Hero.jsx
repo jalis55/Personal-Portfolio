@@ -1,7 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, ArrowDown } from "lucide-react";
+import { Mail, ArrowDown } from "lucide-react";
+import { HugeiconsIcon } from '@hugeicons/react';
+import { FiverrIcon, Github01Icon, Linkedin02Icon } from '@hugeicons/core-free-icons';
 
 const Hero = () => {
+
+  const socialLinks = [
+    { icon: Linkedin02Icon, label: "GitHub", href: "https://github.com/jalis55" },
+    { icon: Github01Icon, label: "LinkedIn", href: "https://linkedin.com/in/jalismtarif/" },
+    { icon: FiverrIcon, label: "Twitter", href: "https://fiverr.com/jalis_tarif" },
+  ];
+
   return (
     <section
       id="home"
@@ -48,13 +57,17 @@ const Hero = () => {
         </div>
 
         <div className="mt-12 flex justify-center space-x-5">
-          {[Github, Linkedin, Mail].map((Icon, i) => (
+          {socialLinks.map((s, i) => (
             <a
               key={i}
-              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              href={s.href}
               className="p-3 rounded-full bg-slate-800/50 border border-slate-700/50 text-slate-400 hover:bg-slate-700/50 hover:text-slate-100 transition-all duration-300"
             >
-              <Icon className="w-5 h-5" />
+
+              <HugeiconsIcon className="w-5 h-5" icon={s.icon} />
             </a>
           ))}
         </div>

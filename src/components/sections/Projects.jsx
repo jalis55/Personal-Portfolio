@@ -2,65 +2,71 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github } from "lucide-react";
+import p1 from './project_images/bos.png';
+import p2 from './project_images/reserva.png';
+import p3 from './project_images/kb.png'
+
 
 export function Projects() {
   const projects = [
     {
+      
+      title: "Back Office Software",
+      description: "A complete back office software for tracking mutual investment on share market",
+      image: p1,
+      technologies: ["Djanog", "Django Rest Framework", "Redis", "React", "TailwindCss"],
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: true,
+    },
+    {
       title: "E-Commerce Platform",
       description:
         "A full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard.",
-      image: "/modern-ecommerce-dashboard.png",
-      technologies: ["Next.js", "TypeScript", "Stripe", "PostgreSQL", "Tailwind CSS"],
+      image: p3,
+      technologies: ["Dango", "Javascript", "PostgreSQL", "Bootstrap"],
       liveUrl: "#",
       githubUrl: "#",
       featured: true,
     },
+
     {
-      title: "Task Management App",
-      description: "Collaborative project management tool with real-time updates, team chat, and advanced analytics.",
-      image: "/task-management-interface.png",
-      technologies: ["React", "Node.js", "Socket.io", "MongoDB", "Material-UI"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: true,
-    },
-    {
-      title: "AI Content Generator",
+      title: "Organizations Lunch Booking System",
       description:
-        "SaaS platform that leverages AI to generate marketing content, blog posts, and social media captions.",
-      image: "/ai-content-generation-interface.png",
-      technologies: ["Next.js", "OpenAI API", "Supabase", "Stripe", "Framer Motion"],
+        "A complete solution for manaing lunch distributins and reduce wastage.",
+      image: p2,
+      technologies: ["Django", "Django Rest Framework", "Javascript", "React", "TailwindCss"],
       liveUrl: "#",
       githubUrl: "#",
       featured: true,
     },
-    {
-      title: "Weather Dashboard",
-      description: "Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
-      image: "/weather-dashboard-interface.png",
-      technologies: ["Vue.js", "Express", "Weather API", "Chart.js"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: false,
-    },
-    {
-      title: "Fitness Tracker",
-      description: "Mobile-first fitness application with workout planning, progress tracking, and social features.",
-      image: "/fitness-tracking-app.png",
-      technologies: ["React Native", "Firebase", "Redux", "Expo"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: false,
-    },
-    {
-      title: "Portfolio Website",
-      description: "Responsive portfolio website with dynamic content management and contact form integration.",
-      image: "/portfolio-website-design.png",
-      technologies: ["Gatsby", "GraphQL", "Netlify CMS", "SCSS"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: false,
-    },
+    // {
+    //   title: "Weather Dashboard",
+    //   description: "Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
+    //   image: "/weather-dashboard-interface.png",
+    //   technologies: ["Vue.js", "Express", "Weather API", "Chart.js"],
+    //   liveUrl: "#",
+    //   githubUrl: "#",
+    //   featured: false,
+    // },
+    // {
+    //   title: "Fitness Tracker",
+    //   description: "Mobile-first fitness application with workout planning, progress tracking, and social features.",
+    //   image: "/fitness-tracking-app.png",
+    //   technologies: ["React Native", "Firebase", "Redux", "Expo"],
+    //   liveUrl: "#",
+    //   githubUrl: "#",
+    //   featured: false,
+    // },
+    // {
+    //   title: "Portfolio Website",
+    //   description: "Responsive portfolio website with dynamic content management and contact form integration.",
+    //   image: "/portfolio-website-design.png",
+    //   technologies: ["Gatsby", "GraphQL", "Netlify CMS", "SCSS"],
+    //   liveUrl: "#",
+    //   githubUrl: "#",
+    //   featured: false,
+    // },
   ];
 
   const featuredProjects = projects.filter((p) => p.featured);
@@ -155,9 +161,9 @@ export function Projects() {
 
         {/* Other projects grid */}
         <div>
-          <h3 className="text-2xl font-bold text-center text-slate-100 mb-10">
+          {/* <h3 className="text-2xl font-bold text-center text-slate-100 mb-10">
             Other Notable Projects
-          </h3>
+          </h3> */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {otherProjects.map((p) => (
               <Card

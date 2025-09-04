@@ -1,29 +1,31 @@
 import { Star, Quote } from "lucide-react";
+import { US, FR } from "country-flag-icons/react/3x2";
 
 export function ClientsFeedback() {
   const testimonials = [
     {
-      name: "Sarah Williams",
-      role: "Product Manager, TechCorp",
-      avatar: "/avatars/sarah-w.jpg",
+      name: "javiersossa",
+      country: <US className='w-6 h-auto rounded' title='United States' />,
+      avatar: "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/c02ce2775a79b554d75802a45c39aab8-1693576627766/5ff6adfc-8ab3-4f7c-afbf-43d670a0996d.png",
       content:
-        "Alex delivered a rock-solid platform that cut our onboarding time in half. His ability to translate complex requirements into clean, scalable code is second to none.",
+        "Jalis is amazing. His work is great and he went far and beyond to accomplish everything I needed! Thank you again!",
       rating: 5,
     },
     {
-      name: "Michael Chen",
-      role: "CEO, StartupXYZ",
-      avatar: "/avatars/michael-c.jpg",
+      name: "mkjetta4",
+      country: <US className='w-6 h-auto rounded' title='United States' />,
+      avatar: "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/fbc51e27a9df5410dd6f5f5a537b5901-165650611613792734.43191/4376932A-E0AB-493C-B8C5-82F9EC0678B5",
+
       content:
-        "From MVP to 50 k users, Alex was the backbone of our engineering team. Always proactive, always reliable—he’s the kind of developer every startup dreams of.",
+        "The best, he is the best in his field.",
       rating: 5,
     },
     {
-      name: "Jessica Lee",
-      role: "Marketing Director, Digital Agency Pro",
-      avatar: "/avatars/jessica-l.jpg",
+      name: "danieledery03",
+      country: <FR className='w-6 h-auto rounded' title='France' />,
+      avatar: "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/fa521efddfb6dbf95ad39c1536a23531-1674473093653/795feca5-53a4-4351-bc27-640308f29295.JPG",
       content:
-        "Working with Alex was a breeze. He turned our Figma files into pixel-perfect, lightning-fast sites and improved our Core Web Vitals by 40 %.",
+        "Very professional and very good person, the work is really good ! I recommand👍",
       rating: 5,
     },
   ];
@@ -65,6 +67,7 @@ export function ClientsFeedback() {
 
               {/* Stars */}
               <StarRating rating={t.rating} />
+              
 
               {/* Content */}
               <p className="text-slate-300 mt-4 mb-6 leading-relaxed grow">
@@ -80,7 +83,7 @@ export function ClientsFeedback() {
                 />
                 <div>
                   <p className="font-semibold text-slate-100">{t.name}</p>
-                  <p className="text-sm text-slate-400">{t.role}</p>
+                  {t.country}
                 </div>
               </div>
             </div>

@@ -3,50 +3,84 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin } from "lucide-react";
 
 export function Experience() {
-  const experiences = [
-    {
-      title: "Senior Full-Stack Developer",
-      company: "TechCorp Solutions",
-      location: "San Francisco, CA",
-      period: "2022 - Present",
-      description:
-        "Lead development of scalable web applications serving 100K+ users. Architected micro-services and mentored juniors.",
-      achievements: [
-        "Reduced load time by 40 % through optimization",
-        "Led 5-developer team on major product redesign",
-        "CI/CD pipeline cut deployment time by 60 %",
-      ],
-      technologies: ["React", "Node.js", "AWS", "PostgreSQL", "Docker"],
-    },
-    {
-      title: "Full-Stack Developer",
-      company: "StartupXYZ",
-      location: "Austin, TX",
-      period: "2020 - 2022",
-      description:
-        "Built MVP and scaled platform from 0 to 50 K users. Implemented responsive UIs and robust REST APIs.",
-      achievements: [
-        "React SPA from scratch with 95 % Lighthouse score",
-        "JWT auth & role-based access control",
-        "Stripe integration handling $500k+ revenue",
-      ],
-      technologies: ["React", "Express", "MongoDB", "Stripe", "Heroku"],
-    },
-    {
-      title: "Frontend Developer",
-      company: "Digital Agency Pro",
-      location: "Remote",
-      period: "2019 - 2020",
-      description:
-        "Delivered pixel-perfect websites for 20+ clients; improved performance & established reusable component library.",
-      achievements: [
-        "Average 35 % faster load times across projects",
-        "Reusable Vue component library adopted by 6 teams",
-        "Perfect Lighthouse scores on 90 % of launches",
-      ],
-      technologies: ["Vue.js", "SCSS", "WordPress", "Figma", "Git"],
-    },
-  ];
+const experiences = [
+  {
+    title: "Senior Software Engineer",
+    company: "Leadsoft Bangladesh Limited",
+    location: "Dhaka, Bangladesh",
+    period: "Jan 2025 – Present",
+    description:
+      "Led cross-functional teams to resolve complex customer operations issues and collaborated with stakeholders to translate business requirements into technical specifications. Mentored junior engineers and optimized backend processes to boost support efficiency.",
+    achievements: [
+      "Mentored junior engineers and conducted code reviews to enforce best practices",
+      "Optimized and automated SQL scripts and backend workflows, reducing response time significantly",
+      "Ensured timely delivery of projects while minimizing business impact"
+    ],
+    technologies: [
+      "Python (backend scripting)",
+      "SQL (MSSQL, MySQL)",
+      "API integration (REST-based)",
+      "Docker (containerization)",
+      "Stakeholder communication",
+      "Mentorship & code review"
+    ]
+  },
+  {
+    title: "Software Engineer",
+    company: "Leadsoft Bangladesh Limited",
+    location: "Dhaka, Bangladesh",
+    period: "Jun 2023 – Jan 2025",
+    description:
+      "Engaged with clients to analyze and implement tailored deployments. Handled complex operations issues ahead of deadlines while enhancing support with SQL tooling and API integrations.",
+    achievements: [
+      "Delivered custom deployments aligned with client needs",
+      "Fixed critical operational issues before deadlines to maintain smooth operations",
+      "Developed and improved SQL scripts to enhance customer support"
+    ],
+    technologies: [
+      "SQL (MSSQL, MySQL)",
+      "REST API integration",
+      "Docker",
+      "Client requirement analysis"
+    ]
+  },
+  {
+    title: "Junior Software Engineer",
+    company: "Leadsoft Bangladesh Limited",
+    location: "Dhaka, Bangladesh",
+    period: "Sep 2022 – Jun 2023",
+    description:
+      "Configured environments, deployed updates, and resolved SQL database errors for capital market clients. Customized report generation to enhance data accessibility and client satisfaction.",
+    achievements: [
+      "Deployed updates and fixed SQL database errors for seamless client operations",
+      "Delivered customized reports tailored to customer requirements"
+    ],
+    technologies: [
+      "SQL (MSSQL, MySQL)",
+      "Report customization",
+      "Deployment configuration"
+    ]
+  },
+  // {
+  //   title: "Junior Software Engineer",
+  //   company: "Krishi Shwapno",
+  //   location: "Dhaka, Bangladesh",
+  //   period: "May 2020 – Aug 2022",
+  //   description:
+  //     "Designed responsive front-end interfaces and implemented backend logic and API integrations to support full-stack functionality.",
+  //   achievements: [
+  //     "Built modern, responsive interfaces using Django templates and frontend technologies",
+  //     "Implemented and maintained backend functionality, including application logic and API integrations"
+  //   ],
+  //   technologies: [
+  //     "Python (Django, Django REST Framework)",
+  //     "Frontend – HTML, CSS, Bootstrap, JavaScript",
+  //     "API integration",
+  //     "Responsive UI"
+  //   ]
+  // }
+];
+
 
   return (
     <section id="experience" className="py-24 bg-slate-950">
@@ -144,15 +178,15 @@ export function Experience() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                title: "Bachelor of Computer Science",
-                meta: "University of Technology • 2015 – 2019",
-                note: "Magna Cum Laude, focus on Software Engineering & Web Dev",
+                title: "Bachelor of Computer Science And Engineering",
+                meta: "North South University Bangladesh • 2015 – 2020",
+                // note: "Magna Cum Laude, focus on Software Engineering & Web Dev",
               },
-              {
-                title: "AWS Certified Solutions Architect",
-                meta: "Amazon Web Services • 2023",
-                note: "Professional cert in distributed-system design on AWS",
-              },
+              // {
+              //   title: "AWS Certified Solutions Architect",
+              //   meta: "Amazon Web Services • 2023",
+              //   note: "Professional cert in distributed-system design on AWS",
+              // },
             ].map((edu) => (
               <Card
                 key={edu.title}

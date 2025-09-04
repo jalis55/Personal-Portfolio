@@ -3,7 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { HugeiconsIcon } from '@hugeicons/react';
+import { FiverrIcon,Github01Icon,Linkedin02Icon } from '@hugeicons/core-free-icons';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -23,15 +25,17 @@ export function Contact() {
   };
 
   const contactInfo = [
-    { icon: Mail, label: "Email", value: "alex.johnson@email.com", href: "mailto:alex.johnson@email.com" },
-    { icon: Phone, label: "Phone", value: "+1 (555) 123-4567", href: "tel:+15551234567" },
-    { icon: MapPin, label: "Location", value: "San Francisco, CA", href: "#" },
+    { icon: Mail, label: "Email", value: "jm.tarif55@gmail.com", href: "mailto:jm.tarif55@gmail.com" },
+    { icon: Phone, label: "Phone", value: "+8801623708711", href: "tel:+15551234567" },
+    { icon: MapPin, label: "Location", value: "Dhaka, BD", href: "#" },
   ];
 
+
+
   const socialLinks = [
-    { icon: Github, label: "GitHub", href: "https://github.com" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
-    { icon: Twitter, label: "Twitter", href: "https://twitter.com" },
+    { icon: Linkedin02Icon, label: "GitHub", href: "https://github.com/jalis55" },
+    { icon: Github01Icon, label: "LinkedIn", href: "https://linkedin.com/in/jalismtarif/" },
+    { icon: FiverrIcon, label: "Twitter", href: "https://fiverr.com/jalis_tarif" },
   ];
 
   return (
@@ -146,7 +150,7 @@ export function Contact() {
                       className="p-2.5 bg-slate-800/60 rounded-lg text-slate-400
                                  hover:bg-sky-400/20 hover:text-sky-400 transition-all"
                     >
-                      <s.icon className="h-5 w-5" />
+                      <HugeiconsIcon icon={s.icon} />
                     </a>
                   ))}
                 </div>
@@ -171,14 +175,14 @@ export function Contact() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-24 pt-10 border-t border-slate-800 text-center">
+        {/* <footer className="mt-24 pt-10 border-t border-slate-800 text-center">
           <p className="text-sm text-slate-500">
             © 2024 Alex Johnson. Built with Next.js, TypeScript & Tailwind CSS.
           </p>
           <p className="text-xs text-slate-600 mt-2">
             Designed and developed with ❤️ in San Francisco
           </p>
-        </footer>
+        </footer> */}
       </div>
     </section>
   );
