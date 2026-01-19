@@ -71,4 +71,4 @@ This project is licensed under the MIT License. Feel free to use it for your own
 
 ---
 
-Created by [MD. Jalis Mahmood](https://github.com/jalis55)
+Created by [MD. Jalis Mahahamud Tarif](https://github.com/jalis55)
