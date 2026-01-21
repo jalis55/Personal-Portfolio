@@ -35,9 +35,7 @@ const Hero = () => {
         </p>
 
         <p className="mt-6 text-slate-500 max-w-xl mx-auto">
-          I craft exceptional digital experiences with modern technologies.
-          Passionate about clean code, innovative solutions, and turning ideas
-          into reality.
+          I craft exceptional digital experiences with modern technologies, including AI and machine learning. Passionate about clean code, innovative solutions, and turning ideas into reality.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -48,11 +46,14 @@ const Hero = () => {
             View My Work
           </Button>
           <Button
+            asChild
             variant="outline"
             size="lg"
-            className="px-8 py-6 rounded-xl bg-sky-500/20 text-sky-300 border border-sky-400/30 hover:bg-sky-500/30 hover:text-sky-100 transition-all duration-300"
+            className="px-8 py-6 rounded-xl bg-slate-800/50 text-slate-300 border border-slate-700/50 hover:bg-slate-700/50 hover:text-slate-100 transition-all duration-300"
           >
-            Download Resume
+            <a href="Jalis-Mahamud-Tarif.pdf" download>
+              Download Resume
+            </a>
           </Button>
         </div>
 
