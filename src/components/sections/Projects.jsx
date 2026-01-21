@@ -71,7 +71,7 @@ export function Projects() {
 
 
   const featuredProjects = projects.filter((p) => p.featured);
-  const otherProjects = projects.filter((p) => !p.featured);
+  const nonFeaturedProjects = projects.filter((p) => !p.featured);
 
   return (
     <section id="projects" className="py-24 bg-slate-950">
@@ -166,7 +166,7 @@ export function Projects() {
             Other Notable Projects
           </h3> */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {otherProjects.map((p) => (
+            {nonFeaturedProjects.map((p) => (
               <Card
                 key={p.title}
                 className="bg-slate-900/50 border border-slate-800 rounded-2xl

@@ -5,37 +5,38 @@ export function ClientsFeedback() {
   const testimonials = [
     {
       name: "javiersossa",
-      country: <US className='w-6 h-auto rounded' title='United States' />,
-      avatar: "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/c02ce2775a79b554d75802a45c39aab8-1693576627766/5ff6adfc-8ab3-4f7c-afbf-43d670a0996d.png",
+      country: <US className="w-6 h-auto rounded" title="United States" />,
+      avatar:
+        "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/c02ce2775a79b554d75802a45c39aab8-1693576627766/5ff6adfc-8ab3-4f7c-afbf-43d670a0996d.png",
       content:
         "Jalis is amazing. His work is great and he went far and beyond to accomplish everything I needed! Thank you again!",
       rating: 5,
     },
     {
       name: "mkjetta4",
-      country: <US className='w-6 h-auto rounded' title='United States' />,
-      avatar: "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/fbc51e27a9df5410dd6f5f5a537b5901-165650611613792734.43191/4376932A-E0AB-493C-B8C5-82F9EC0678B5",
-
-      content:
-        "The best, he is the best in his field.",
+      country: <US className="w-6 h-auto rounded" title="United States" />,
+      avatar:
+        "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/fbc51e27a9df5410dd6f5f5a537b5901-165650611613792734.43191/4376932A-E0AB-493C-B8C5-82F9EC0678B5",
+      content: "The best, he is the best in his field.",
       rating: 5,
     },
     {
       name: "danieledery03",
-      country: <FR className='w-6 h-auto rounded' title='France' />,
-      avatar: "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/fa521efddfb6dbf95ad39c1536a23531-1674473093653/795feca5-53a4-4351-bc27-640308f29295.JPG",
-      content:
-        "Very professional and very good person, the work is really good ! I recommand👍",
+      country: <FR className="w-6 h-auto rounded" title="France" />,
+      avatar:
+        "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/attachments/profile/photo/fa521efddfb6dbf95ad39c1536a23531-1674473093653/795feca5-53a4-4351-bc27-640308f29295.JPG",
+      content: "Very professional and very good person, the work is really good ! I recommand👍",
       rating: 5,
     },
   ];
 
-  const StarRating = (rating ) => (
+  const StarRating = ({ rating }) => (
     <div className="flex gap-1">
       {[...Array(5)].map((_, i) => (
         <Star
           key={i}
-          className={`h-4 w-4 ${i < rating ? "text-yellow-400 fill-current" : "text-slate-600"}`}
+          className={`h-4 w-4 ${i < rating ? "text-yellow-400 fill-current" : "text-slate-600"
+            }`}
         />
       ))}
     </div>
@@ -67,7 +68,6 @@ export function ClientsFeedback() {
 
               {/* Stars */}
               <StarRating rating={t.rating} />
-              
 
               {/* Content */}
               <p className="text-slate-300 mt-4 mb-6 leading-relaxed grow">
