@@ -39,9 +39,7 @@ const About = () => {
             About Me
           </h2>
           <p className="mt-4 text-slate-400 max-w-2xl mx-auto">
-            I’m a full-stack developer with 5+ years of experience building
-            products that matter. I love turning complex problems into simple,
-            beautiful solutions.
+            I’m a full-stack developer with 3+ years of experience building products that blend seamless UX with smart AI. From React-powered interfaces styled with Tailwind CSS to Python backends handling PostgreSQL and Redis for high-performance data flows, I love dissecting complex challenges—like predictive modeling with Scikit-learn or agentic workflows in LangChain—and distilling them into elegant, intuitive solutions that scale.
           </p>
         </div>
 
@@ -75,18 +73,13 @@ const About = () => {
               </h3>
               <div className="space-y-4 text-slate-400 text-base">
                 <p>
-                  I started coding in college and quickly fell in love with
-                  creating digital solutions. What began as curiosity became a
-                  career dedicated to exceptional user experiences.
+                  I started coding in college, sparked by a simple Python script that automated my study notes, and quickly fell in love with crafting digital solutions that solve real problems. What began as curiosity evolved into a career blending full-stack development with AI innovation, always chasing exceptional user experiences.
                 </p>
                 <p>
-                  Today I work with React, Node.js, and cloud platforms, helping
-                  startups and enterprises alike bring their visions to life.
+                  Today, I build scalable apps using React.js for dynamic frontends, Python with Django or FastAPI for robust backends, and integrate AI/ML tools like Scikit-learn and LangChain to power intelligent features—all deployed via Docker and GitHub Actions. Whether it's helping startups launch MVPs or enterprises optimize with RAG-enhanced systems, I thrive on turning bold ideas into reality.
                 </p>
                 <p>
-                  When I’m not coding, I’m contributing to open-source,
-                  mentoring new developers, or exploring the bleeding edge of
-                  tech.
+                  When I’m not coding, I’m contributing to open-source projects, mentoring aspiring devs, or diving into the latest in LLMs and prompt engineering.
                 </p>
               </div>
             </div>

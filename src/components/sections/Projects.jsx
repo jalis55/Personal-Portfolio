@@ -10,7 +10,7 @@ import p3 from './project_images/kb.png'
 export function Projects() {
   const projects = [
     {
-      
+
       title: "Back Office Software",
       description: "A complete back office software for tracking mutual investment on share market",
       image: p1,
@@ -68,6 +68,7 @@ export function Projects() {
     //   featured: false,
     // },
   ];
+
 
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);

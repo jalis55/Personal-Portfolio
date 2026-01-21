@@ -9,22 +9,33 @@ export function Skills() {
     },
     {
       title: "Backend",
-      skills: ["Python", "Django","Flask","FastApi","PostgreSQL", "MongoDB", "Redis", "Celry"],
+      skills: ["Python", "Django", "Flask", "FastApi", "PostgreSQL", "MongoDB", "Redis", "Celery"],
     },
     {
       title: "DevOps & Tools",
-      skills: ["Docker", "Git", "GitHub Actions", ],
+      skills: ["Docker", "Git", "GitHub Actions",],
     },
+    {
+      title: "AI/ML Skills",
+      skills: [
+        "Scikit-learn (Regression, Classification)",
+        "Data Preprocessing & Feature Engineering",
+        "Model Evaluation & Optimization",
+        "Basic LLMs & Prompt Engineering",
+        "LangChain (Chain Building & Agents)",
+        "RAG (Retrieval-Augmented Generation)",
+      ],
+    }
     // {
     //   title: "Mobile & Other",
     //   skills: ["React Native", "Firebase", "Supabase", "Stripe", "Socket.io", "REST APIs", "Microservices"],
     // },
   ];
-  const learingSkills=[
-    "AI/ML", 
+  const learingSkills = [
+    "AI/ML",
     "Data Engineering",
-     "Kubernetes",
-     "Aws"
+    "Kubernetes",
+    "Aws"
   ]
 
   return (
