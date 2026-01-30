@@ -2,10 +2,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github } from "lucide-react";
+
 import p1 from './project_images/bos.png';
 import p2 from './project_images/reserva.png';
-import p3 from './project_images/kb.png'
-
+import p3 from './project_images/kb.png';
+import p4 from './project_images/ats.png';
+import p5 from './project_images/pricepulse.png';
 
 export function Projects() {
   const projects = [
@@ -40,24 +42,25 @@ export function Projects() {
       githubUrl: "#",
       featured: true,
     },
-    // {
-    //   title: "Weather Dashboard",
-    //   description: "Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
-    //   image: "/weather-dashboard-interface.png",
-    //   technologies: ["Vue.js", "Express", "Weather API", "Chart.js"],
-    //   liveUrl: "#",
-    //   githubUrl: "#",
-    //   featured: false,
-    // },
-    // {
-    //   title: "Fitness Tracker",
-    //   description: "Mobile-first fitness application with workout planning, progress tracking, and social features.",
-    //   image: "/fitness-tracking-app.png",
-    //   technologies: ["React Native", "Firebase", "Redux", "Expo"],
-    //   liveUrl: "#",
-    //   githubUrl: "#",
-    //   featured: false,
-    // },
+    {
+      title: "ATS Checker",
+      description: "LLM based application to check ATS score and recommend improvements",
+      image: p4,
+      technologies: ["Python", "Streamlit", "GROQ", "LangChain"],
+      liveUrl: "https://ats-checker55.streamlit.app/",
+      githubUrl: "https://github.com/jalis55/LLM--ATS-Checker",
+      featured: false,
+    },
+
+    {
+      title: "PricePulse",
+      description: "LLM based application to track history prices of instrument in Dhaka Stock Exchage using chat interface",
+      image: p5,
+      technologies: ["Python", "Streamlit", "GROQ", "LangChain", "Postgres"],
+      liveUrl: "https://pricepulse-dse.streamlit.app/",
+      githubUrl: "https://github.com/jalis55/LLM-PricePulse",
+      featured: false,
+    },
     // {
     //   title: "Portfolio Website",
     //   description: "Responsive portfolio website with dynamic content management and contact form integration.",
