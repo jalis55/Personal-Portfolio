@@ -18,7 +18,7 @@ export function Projects() {
       image: p1,
       technologies: ["Djanog", "Django Rest Framework", "Redis", "React", "TailwindCss"],
       liveUrl: "#",
-      githubUrl: "#",
+      githubUrl: "https://github.com/jalis55/FastInvestment-BOS",
       featured: true,
     },
     {
@@ -28,7 +28,7 @@ export function Projects() {
       image: p3,
       technologies: ["Dango", "Javascript", "PostgreSQL", "Bootstrap"],
       liveUrl: "#",
-      githubUrl: "#",
+      githubUrl: "https://github.com/jalis55/khamari-bazar",
       featured: true,
     },
 
@@ -39,7 +39,7 @@ export function Projects() {
       image: p2,
       technologies: ["Django", "Django Rest Framework", "Javascript", "React", "TailwindCss"],
       liveUrl: "#",
-      githubUrl: "#",
+      githubUrl: "https://github.com/jalis55/reservation-app",
       featured: true,
     },
     {
