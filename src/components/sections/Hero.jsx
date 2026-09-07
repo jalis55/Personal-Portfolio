@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { ArrowDown, Download, Sparkles } from "lucide-react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -54,8 +53,10 @@ const Hero = () => {
 
   const role = useTypedRole([
     "Full-Stack Developer",
+    'Python Expert',
     "Problem Solver",
-    "AI Enthusiast",
+    "AI/ML Enthusiast",
+    'Aspiring Data Engineer',
     "Clean Code Advocate",
   ]);
 
@@ -83,29 +84,33 @@ const Hero = () => {
     return () => clearTimeout(t);
   }, []);
 
-  /* cursor-tracked radial glow */
+  /* cursor-tracked radial glow — rAF throttled */
   useEffect(() => {
     const section = sectionRef.current;
     const orb = orbRef.current;
     if (!section || !orb) return;
-
+    let raf = 0;
+    let mx = 0, my = 0;
     const handleMove = (e) => {
       const rect = section.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      orb.style.transform = `translate(${x - 320}px, ${y - 320}px)`;
+      mx = e.clientX - rect.left;
+      my = e.clientY - rect.top;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        orb.style.transform = `translate(${mx - 320}px, ${my - 320}px)`;
+      });
     };
-
     section.addEventListener("mousemove", handleMove);
-    return () => section.removeEventListener("mousemove", handleMove);
+    return () => {
+      section.removeEventListener("mousemove", handleMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
     <>
-      {/* ── Google Fonts ── */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap');
-
         .hero-font-display { font-family: 'Playfair Display', Georgia, serif; }
         .hero-font-body    { font-family: 'DM Sans', sans-serif; }
 
@@ -300,8 +305,9 @@ const Hero = () => {
             className={`reveal reveal-d5 ${mounted ? "in" : ""} mt-10 flex flex-col sm:flex-row gap-3 justify-center items-center`}
           >
             {/* Primary */}
-            <button
-              className="group relative px-8 py-3.5 rounded-xl text-sm font-medium text-white overflow-hidden transition-all duration-300"
+            <a
+              href="#projects"
+              className="group relative px-8 py-3.5 rounded-xl text-sm font-medium text-white overflow-hidden transition-all duration-300 inline-flex items-center justify-center"
               style={{
                 background:
                   "linear-gradient(135deg, rgba(56,189,248,.20), rgba(129,140,248,.20))",
@@ -334,11 +340,11 @@ const Hero = () => {
                   />
                 </svg>
               </span>
-            </button>
+            </a>
 
             {/* Secondary */}
             <a
-              href="[CV]Jalis_Mahamud_Tarif.pdf"
+              href="/[CV]Jalis_Mahamud_Tarif.pdf"
               download
               className="group px-8 py-3.5 rounded-xl text-sm font-medium text-slate-400 flex items-center gap-2 transition-all duration-300 hover:text-slate-100"
               style={{

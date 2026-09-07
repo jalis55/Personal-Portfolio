@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Code, Lightbulb, Users, Zap } from "lucide-react";
 import pp from "../../assets/imgg_tarif.png";
+import ppWebp from "../../assets/imgg_tarif.webp";
 
 /* ── Intersection Observer hook for scroll-triggered reveals ── */
 function useReveal(threshold = 0.15) {
@@ -54,8 +55,6 @@ const About = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap');
-
         .about-display { font-family: 'Playfair Display', Georgia, serif; }
         .about-body    { font-family: 'DM Sans', sans-serif; }
 
@@ -113,6 +112,11 @@ const About = () => {
         .photo-frame {
           position: relative;
           display: inline-block;
+          width: 260px;
+          aspect-ratio: 3 / 4;
+          border-radius: 18px;
+          overflow: hidden;
+          background: rgba(15,23,42,.8);
         }
         .photo-frame::before {
           content: '';
@@ -122,9 +126,14 @@ const About = () => {
           background: linear-gradient(135deg, rgba(56,189,248,.5), rgba(129,140,248,.3), rgba(192,132,252,.2));
           z-index: 0;
         }
+        .photo-frame picture,
         .photo-frame img {
           position: relative;
           z-index: 1;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center 12%;
           border-radius: 16px;
           display: block;
         }
@@ -247,7 +256,7 @@ const About = () => {
 
           {/* ── Highlight cards ── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
-            {highlights.map(({ icon: Icon, title, description, accent }, i) => (
+            {highlights.map(({ icon: IconComponent, title, description, accent }, i) => (
               <div
                 key={title}
                 className={`about-reveal about-d${i + 2} ${sectionVisible ? "in" : ""} hl-card p-6`}
@@ -268,7 +277,7 @@ const About = () => {
                     border: `1px solid ${accent}0.22)`,
                   }}
                 >
-                  <Icon className="w-5 h-5" style={{ color: `${accent}0.90)`.replace("rgba(", "rgb(").replace(/,[\d.]+\)$/, ")") }} />
+                  <IconComponent className="w-5 h-5" style={{ color: `${accent}0.90)`.replace("rgba(", "rgb(").replace(/,[\d.]+\)$/, ")") }} />
                 </div>
                 <h3 className="text-base font-semibold text-slate-100 mb-2">{title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed font-light">{description}</p>
@@ -341,16 +350,18 @@ const About = () => {
               <div className={`about-reveal about-d7 ${sectionVisible ? "in" : ""} lg:col-span-1 flex justify-center relative`}>
                 <div className="photo-glow" />
                 <div className="photo-frame">
-                  <img
-                    src={pp}
-                    alt="Jalis Mahamud Tarif"
-                    width={240}
-                    height={320}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-[240px] h-[320px] object-cover rounded-md"
-                    style={{ display: "block" }}
-                  />
+                  <picture>
+                    <source srcSet={ppWebp} type="image/webp" />
+                    <img
+                      src={pp}
+                      alt="Jalis Mahamud Tarif — Full-Stack Developer"
+                      width={480}
+                      height={640}
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
+                    />
+                  </picture>
                   {/* floating badge */}
                   <div
                     className="absolute -bottom-4 -right-4 px-3 py-2 rounded-xl text-xs font-medium text-slate-200 flex items-center gap-2 z-10"

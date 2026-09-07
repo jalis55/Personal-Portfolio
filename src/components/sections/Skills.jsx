@@ -63,8 +63,6 @@ export function Skills() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap');
-
         .sk-display { font-family: 'Playfair Display', Georgia, serif; }
         .sk-body    { font-family: 'DM Sans', sans-serif; }
 
@@ -256,7 +254,7 @@ export function Skills() {
 
           {/* ── Skill cards 2×2 ── */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {skillCategories.map(({ title, icon: Icon, accent, skills }, i) => (
+            {skillCategories.map(({ title, icon: IconComponent, accent, skills }, i) => (
               <div
                 key={title}
                 className={`sk-reveal sk-d${i + 2} ${sectionVisible ? "in" : ""} sk-card p-7`}
@@ -292,7 +290,7 @@ export function Skills() {
                 <div className="flex items-center gap-3 mb-6">
                   <div className="sk-icon-box"
                     style={{ background: `${accent}0.10)`, border: `1px solid ${accent}0.22)` }}>
-                    <Icon className="w-5 h-5" style={{ color: `${accent}0.85)`.replace(/,[\d.]+\)$/, ")").replace("rgba", "rgb") }} />
+                    <IconComponent className="w-5 h-5" style={{ color: `${accent}0.85)`.replace(/,[\d.]+\)$/, ")").replace("rgba", "rgb") }} />
                   </div>
                   <h3 className="sk-display text-lg font-bold text-slate-100">{title}</h3>
                   <span className="ml-auto text-xs text-slate-600 font-light tabular-nums">

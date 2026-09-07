@@ -1,8 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-
-import './App.css'
 import Navbar from './components/layouts/Navbar'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
@@ -15,16 +10,13 @@ import { ClientsFeedback } from './components/sections/ClientsFeedback'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
 
 
 
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-slate-950">
       <Navbar />
       <main>
-
         <Hero />
         <About />
         <Skills />
@@ -33,6 +25,12 @@ function App() {
         <ClientsFeedback />
         <Contact />
       </main>
+      <footer className="border-t border-slate-800/60 bg-slate-950 py-8 text-center">
+        <p className="text-sm text-slate-500">
+          © {new Date().getFullYear()} Jalis Mahamud Tarif. Built with React, Vite & Tailwind CSS.
+        </p>
+        <p className="text-xs text-slate-600 mt-1">Crafted with care in Dhaka, Bangladesh</p>
+      </footer>
     </div>
 
   )

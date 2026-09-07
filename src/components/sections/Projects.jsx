@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, Github, Star } from "lucide-react";
 
-import p1 from './project_images/bos.png';
-import p2 from './project_images/reserva.png';
-import p3 from './project_images/kb.png';
-import p4 from './project_images/ats.png';
-import p5 from './project_images/pricepulse.png';
+import p1 from './project_images/bos.webp';
+import p2 from './project_images/reserva.webp';
+import p3 from './project_images/kb.webp';
+import p4 from './project_images/ats.webp';
+import p5 from './project_images/pricepulse.webp';
+import p1Png from './project_images/bos.png';
+import p2Png from './project_images/reserva.png';
+import p3Png from './project_images/kb.png';
+import p4Png from './project_images/ats.png';
+import p5Png from './project_images/pricepulse.png';
 
 function useReveal(threshold = 0.08) {
   const ref = useRef(null);
@@ -68,17 +73,29 @@ function FeaturedCard({ project, index }) {
 
       <div className={`proj-featured-inner ${isReversed ? "proj-reversed" : ""}`}>
 
-        {/* Image pane */}
+        {/* Image pane — browser chrome + top-aligned cover */}
         <div className="proj-img-pane">
+          <div className="proj-browser-bar">
+            <span className="proj-browser-dot" style={{ background: "#ef4444" }} />
+            <span className="proj-browser-dot" style={{ background: "#eab308" }} />
+            <span className="proj-browser-dot" style={{ background: "#22c55e" }} />
+            <span className="ml-3 text-[10px] text-slate-500 truncate font-mono hidden sm:inline">{project.liveUrl.replace("https://","").replace("http://","").replace(/\/$/,"") || "preview"}</span>
+          </div>
           <div className="proj-img-wrap">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="proj-img"
-              style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.4s ease" }}
-              onLoad={() => setImgLoaded(true)}
-            />
-            {/* overlay gradient */}
+            <picture>
+              <source srcSet={project.image} type="image/webp" />
+              <img
+                src={project.fallback || project.image}
+                alt={`${project.title} — screenshot`}
+                width={900}
+                height={455}
+                loading="lazy"
+                decoding="async"
+                className="proj-img"
+                style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.4s ease" }}
+                onLoad={() => setImgLoaded(true)}
+              />
+            </picture>
             <div className="proj-img-overlay" />
           </div>
         </div>
@@ -192,17 +209,31 @@ function SmallCard({ project, index }) {
     >
       <div className="proj-shimmer" />
 
-      {/* image */}
+      {/* image — compact browser chrome, 16/10 aspect so screenshot fits without squash */}
       <div className="proj-small-img-wrap">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="proj-small-img"
-          style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.4s ease" }}
-          onLoad={() => setImgLoaded(true)}
-        />
-        <div className="proj-small-img-overlay" />
-        {/* hover zoom handled via CSS */}
+        <div className="proj-small-browser">
+          <span className="proj-browser-dot" style={{ background: "#ef4444", width: 7, height: 7 }} />
+          <span className="proj-browser-dot" style={{ background: "#eab308", width: 7, height: 7 }} />
+          <span className="proj-browser-dot" style={{ background: "#22c55e", width: 7, height: 7 }} />
+          <span className="ml-2 text-[10px] text-slate-500 truncate font-mono hidden sm:inline">{project.liveUrl.replace("https://","").replace("http://","").replace(/\/$/,"").slice(0,22) || "preview"}</span>
+        </div>
+        <div className="proj-small-img-area">
+          <picture>
+            <source srcSet={project.image} type="image/webp" />
+            <img
+              src={project.fallback || project.image}
+              alt={`${project.title} — screenshot`}
+              width={900}
+              height={562}
+              loading="lazy"
+              decoding="async"
+              className="proj-small-img"
+              style={{ opacity: imgLoaded ? 1 : 0, transition: "opacity 0.4s ease" }}
+              onLoad={() => setImgLoaded(true)}
+            />
+          </picture>
+          <div className="proj-small-img-overlay" />
+        </div>
       </div>
 
       <div className="p-5">
@@ -279,6 +310,7 @@ export function Projects() {
       title: "Back Office Software",
       description: "A complete back office software for tracking mutual investment on the share market.",
       image: p1,
+      fallback: p1Png,
       technologies: ["Django", "Django REST Framework", "Redis", "React", "Tailwind CSS"],
       liveUrl: "https://fast-inv-ltd.netlify.app/",
       githubUrl: "https://github.com/jalis55/FastInvestment-BOS",
@@ -288,6 +320,7 @@ export function Projects() {
       title: "E-Commerce Platform",
       description: "A full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard.",
       image: p3,
+      fallback: p3Png,
       technologies: ["Django", "JavaScript", "PostgreSQL", "Bootstrap"],
       liveUrl: "https://khamari-bazar.onrender.com/",
       githubUrl: "https://github.com/jalis55/khamari-bazar",
@@ -297,6 +330,7 @@ export function Projects() {
       title: "Lunch Booking System",
       description: "A complete solution for managing lunch distributions and reducing wastage within organizations.",
       image: p2,
+      fallback: p2Png,
       technologies: ["Django", "Django REST Framework", "React", "Tailwind CSS"],
       liveUrl: "#",
       githubUrl: "https://github.com/jalis55/reservation-app",
@@ -306,6 +340,7 @@ export function Projects() {
       title: "ATS Checker",
       description: "LLM-based application to check ATS score and recommend targeted resume improvements.",
       image: p4,
+      fallback: p4Png,
       technologies: ["Python", "Streamlit", "GROQ", "LangChain"],
       liveUrl: "https://ats-checker55.streamlit.app/",
       githubUrl: "https://github.com/jalis55/LLM--ATS-Checker",
@@ -315,6 +350,7 @@ export function Projects() {
       title: "PricePulse",
       description: "LLM-based app to track historical instrument prices on Dhaka Stock Exchange via a chat interface.",
       image: p5,
+      fallback: p5Png,
       technologies: ["Python", "Streamlit", "GROQ", "LangChain", "PostgreSQL"],
       liveUrl: "https://pricepulse-dse.streamlit.app/",
       githubUrl: "https://github.com/jalis55/LLM-PricePulse",
@@ -328,8 +364,6 @@ export function Projects() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap');
-
         .proj-display { font-family: 'Playfair Display', Georgia, serif; }
         .proj-body    { font-family: 'DM Sans', sans-serif; }
 
@@ -383,19 +417,43 @@ export function Projects() {
         .proj-featured-card:hover .proj-shimmer,
         .proj-small-card:hover .proj-shimmer { opacity: 1; }
 
-        /* image pane */
-        .proj-img-pane { position: relative; overflow: hidden; min-height: 260px; }
+        /* image pane — now fits screenshots without ugly center-crop */
+        .proj-img-pane {
+          position: relative;
+          overflow: hidden;
+          background: #0f172a;
+          min-height: 240px;
+          display: flex;
+          flex-direction: column;
+        }
         @media (min-width: 1024px) { .proj-img-pane { min-height: 360px; } }
-        .proj-img-wrap { position: relative; width: 100%; height: 100%; min-height: inherit; }
+        .proj-browser-bar {
+          height: 30px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 0 14px;
+          background: rgba(30,41,59,.95);
+          border-bottom: 1px solid rgba(51,65,85,.40);
+          flex-shrink: 0;
+        }
+        .proj-browser-dot { width: 9px; height: 9px; border-radius: 9999px; }
+        .proj-img-wrap { position: relative; flex: 1; overflow: hidden; background: #020617; }
+        .proj-img-wrap picture { display: contents; }
+        .proj-small-img-wrap picture { display: contents; }
         .proj-img {
-          width: 100%; height: 100%; object-fit: cover;
-          min-height: inherit;
+          position: absolute;
+          inset: 0;
+          width: 100%; height: 100%;
+          object-fit: cover;
+          object-position: top center;
           transition: transform 0.55s cubic-bezier(.22,1,.36,1);
+          background: #0f172a;
         }
         .proj-featured-card:hover .proj-img { transform: scale(1.04); }
         .proj-img-overlay {
           position: absolute; inset: 0;
-          background: linear-gradient(135deg, rgba(15,23,42,.35) 0%, transparent 60%);
+          background: linear-gradient(to bottom, transparent 65%, rgba(15,23,42,.22) 100%);
           pointer-events: none;
         }
 
@@ -488,18 +546,39 @@ export function Projects() {
           backdrop-filter: blur(12px);
           overflow: hidden;
           transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.28s cubic-bezier(.34,1.56,.64,1);
+          display: flex;
+          flex-direction: column;
         }
         .proj-small-img-wrap {
-          position: relative; overflow: hidden; height: 180px;
+          position: relative;
+          overflow: hidden;
+          background: #0f172a;
+          flex-shrink: 0;
+          display: flex;
+          flex-direction: column;
+        }
+        .proj-small-browser {
+          height: 28px; display:flex; align-items:center; gap:5px; padding:0 12px;
+          background: rgba(30,41,59,.95); border-bottom:1px solid rgba(51,65,85,.35);
+          flex-shrink: 0;
+        }
+        .proj-small-img-area {
+          position: relative;
+          aspect-ratio: 16 / 10;
+          overflow: hidden;
+          background: #020617;
         }
         .proj-small-img {
-          width: 100%; height: 100%; object-fit: cover;
+          position: absolute; inset: 0;
+          width: 100%; height: 100%;
+          object-fit: cover; object-position: top center;
           transition: transform 0.55s cubic-bezier(.22,1,.36,1);
+          background: #020617;
         }
-        .proj-small-card:hover .proj-small-img { transform: scale(1.06); }
+        .proj-small-card:hover .proj-small-img { transform: scale(1.05); }
         .proj-small-img-overlay {
           position: absolute; inset: 0;
-          background: linear-gradient(to bottom, transparent 40%, rgba(15,23,42,.70) 100%);
+          background: linear-gradient(to bottom, transparent 55%, rgba(15,23,42,.50) 100%);
           pointer-events: none;
         }
 
@@ -577,7 +656,7 @@ export function Projects() {
                   </span>
                 </h3>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
                 {others.map((p, i) => (
                   <SmallCard key={p.title} project={p} index={i} />
                 ))}

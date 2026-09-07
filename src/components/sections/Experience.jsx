@@ -39,7 +39,7 @@ function ExperienceCard({ exp, index }) {
   const [expanded, setExpanded] = useState(index === 0);
   const isLeft = index % 2 === 0;
 
-  const isCurrent = exp.period.includes("Present");
+  const isCurrent = index === 0;
 
   return (
     <div
@@ -223,8 +223,6 @@ export function Experience() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap');
-
         .exp-display { font-family: 'Playfair Display', Georgia, serif; }
         .exp-body    { font-family: 'DM Sans', sans-serif; }
 
