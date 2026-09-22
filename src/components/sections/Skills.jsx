@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Globe, Server, Terminal, Brain, BookOpen
-} from "lucide-react";
+import { Globe, Server, Terminal, Brain, BookOpen } from "lucide-react";
 
 function useReveal(threshold = 0.1) {
   const ref = useRef(null);
@@ -9,347 +7,146 @@ function useReveal(threshold = 0.1) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { threshold }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold });
+    obs.observe(el);
+    return () => obs.disconnect();
   }, [threshold]);
   return [ref, visible];
 }
 
-export function Skills() {
-  const [sectionRef, sectionVisible] = useReveal(0.06);
+function CircularSkill({ label, percentage, color }) {
+  const radius = 22;
+  const circumference = radius * 2 * Math.PI;
+  const [progress, setProgress] = useState(0);
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
 
-  const skillCategories = [
-    {
-      title: "Frontend",
-      icon: Globe,
-      accent: "rgba(56,189,248,",   // sky
-      skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5", "CSS3"],
-    },
-    {
-      title: "Backend",
-      icon: Server,
-      accent: "rgba(129,140,248,",  // indigo
-      skills: ["Python", "Django", "FastAPI", "Flask", "PostgreSQL", "MongoDB", "Redis", "Celery"],
-    },
-    {
-      title: "DevOps & Tools",
-      icon: Terminal,
-      accent: "rgba(192,132,252,",  // purple
-      skills: ["Docker", "Git", "GitHub Actions"],
-    },
-    {
-      title: "AI / ML",
-      icon: Brain,
-      accent: "rgba(56,189,248,",   // sky
-      skills: [
-        "Scikit-learn",
-        "Regression & Classification",
-        "Feature Engineering",
-        "Model Evaluation",
-        "LangChain",
-        "RAG",
-        "Prompt Engineering",
-        "LLMs",
-      ],
-    },
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold: 0.5 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    const startTime = Date.now();
+    const duration = 1200;
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const p = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setProgress(eased * percentage);
+      if (p < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [visible, percentage]);
+
+  const offset = circumference - (progress / 100) * circumference;
+
+  return (
+    <div ref={ref} className="flex flex-col items-center gap-1">
+      <svg width={52} height={52} className="-rotate-90">
+        <circle cx={26} cy={26} r={radius} fill="none" stroke="rgba(30,41,59,.5)" strokeWidth={3} />
+        <circle cx={26} cy={26} r={radius} fill="none" stroke={color} strokeWidth={3} strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" style={{ filter: `drop-shadow(0 0 4px ${color}40)`, transition: "stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1)" }} />
+      </svg>
+      <span className="text-[9px] text-zinc-500 font-light">{label}</span>
+    </div>
+  );
+}
+
+export default function Skills() {
+  const [ref, visible] = useReveal(0.06);
+
+  const categories = [
+    { title: "Frontend", icon: Globe, color: "#0d9488", skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5", "CSS3"], progress: 85 },
+    { title: "Backend", icon: Server, color: "#14b8a6", skills: ["Python", "Django", "FastAPI", "Flask", "PostgreSQL", "MongoDB", "Redis"], progress: 80 },
+    { title: "DevOps", icon: Terminal, color: "#f59e0b", skills: ["Docker", "Git", "GitHub Actions"], progress: 70 },
+    { title: "AI / ML", icon: Brain, color: "#0d9488", skills: ["Scikit-learn", "LangChain", "Prompt Engineering", "LLMs", "RAG"], progress: 75 },
   ];
 
-  const learningSkills = ["AI/ML", "Data Engineering", "Kubernetes", "AWS"];
+  const learning = ["AI/ML", "Data Engineering", "Kubernetes", "AWS"];
 
   return (
     <>
       <style>{`
-        .sk-display { font-family: 'Playfair Display', Georgia, serif; }
-        .sk-body    { font-family: 'DM Sans', sans-serif; }
+        @keyframes slide-up { from{ opacity:0; transform:translateY(40px) } to{ opacity:1; transform:translateY(0) } }
+        @keyframes pulse-dot { 0%,100%{ opacity:1; transform:scale(1) } 50%{ opacity:.5; transform:scale(.8) } }
+        @keyframes float-pill { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-3px) } }
 
-        .sk-reveal {
-          opacity: 0;
-          transform: translateY(26px);
-          transition: opacity 0.70s cubic-bezier(.22,1,.36,1),
-                      transform 0.70s cubic-bezier(.22,1,.36,1);
-        }
-        .sk-reveal.in { opacity: 1; transform: translateY(0); }
-        .sk-d1 { transition-delay: 0.05s; }
-        .sk-d2 { transition-delay: 0.14s; }
-        .sk-d3 { transition-delay: 0.22s; }
-        .sk-d4 { transition-delay: 0.30s; }
-        .sk-d5 { transition-delay: 0.38s; }
-        .sk-d6 { transition-delay: 0.46s; }
+        .sk-section { position:relative; padding:6rem 0; background:#020617; overflow:hidden; }
+        .sk-grid { background-image: linear-gradient(to right, rgba(13,148,136,.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(13,148,136,.02) 1px, transparent 1px); background-size: 50px 50px; }
 
-        /* ── skill card ── */
-        .sk-card {
-          position: relative;
-          border-radius: 18px;
-          background: rgba(15,23,42,.65);
-          border: 1px solid rgba(51,65,85,.50);
-          backdrop-filter: blur(12px);
-          overflow: hidden;
-          transition: transform 0.28s cubic-bezier(.34,1.56,.64,1),
-                      border-color 0.25s ease,
-                      box-shadow 0.25s ease;
-        }
-        .sk-card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 1px;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-        .sk-card:hover { transform: translateY(-5px); }
-        .sk-card:hover::before { opacity: 1; }
+        .sk-card { position:relative; border-radius:20px; background:rgba(15,23,42,.45); border:1px solid rgba(30,41,59,.4); backdrop-filter:blur(16px); padding:2rem; transition:all .35s cubic-bezier(.34,1.56,.64,1); overflow:hidden; }
+        .sk-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--sk-color, #0d9488), transparent); opacity:0; transition:opacity .4s; }
+        .sk-card:hover { transform:translateY(-6px); border-color:rgba(13,148,136,.2); box-shadow:0 20px 40px rgba(13,148,136,.06); }
+        .sk-card:hover::after { opacity:1; }
 
-        /* card top glow patch */
-        .sk-card-glow {
-          position: absolute;
-          top: -60px; left: -60px;
-          width: 200px; height: 200px;
-          border-radius: 50%;
-          opacity: 0;
-          transition: opacity 0.4s ease;
-          pointer-events: none;
-        }
-        .sk-card:hover .sk-card-glow { opacity: 1; }
+        .skill-pill { display:inline-flex; align-items:center; padding:4px 12px; border-radius:99px; font-size:11px; background:rgba(30,41,59,.4); border:1px solid rgba(30,41,59,.5); color:#64748b; transition:all .25s; cursor:default; }
+        .skill-pill:hover { background:rgba(13,148,136,.1); border-color:rgba(13,148,136,.25); color:#5eead4; transform:scale(1.05); }
 
-        /* ── skill pill ── */
-        .sk-pill {
-          display: inline-flex;
-          align-items: center;
-          padding: 4px 12px;
-          border-radius: 99px;
-          font-size: 12px;
-          font-weight: 400;
-          letter-spacing: 0.01em;
-          background: rgba(30,41,59,.60);
-          border: 1px solid rgba(51,65,85,.55);
-          color: rgba(148,163,184,1);
-          transition: background 0.2s ease, border-color 0.2s ease,
-                      color 0.2s ease, transform 0.2s cubic-bezier(.34,1.56,.64,1);
-          cursor: default;
-        }
-        .sk-pill:hover { transform: scale(1.06); }
+        .learn-pill { display:inline-flex; align-items:center; gap:6px; padding:6px 16px; border-radius:99px; font-size:12px; background:rgba(13,148,136,.08); border:1px solid rgba(13,148,136,.18); color:#5eead4; transition:all .25s; cursor:default; animation:float-pill 3s ease-in-out infinite; }
+        .learn-pill:nth-child(2) { animation-delay:.3s; }
+        .learn-pill:nth-child(3) { animation-delay:.6s; }
+        .learn-pill:nth-child(4) { animation-delay:.9s; }
+        .learn-dot { width:4px; height:4px; border-radius:50%; background:#0d9488; animation:pulse-dot 2s ease-in-out infinite; }
 
-        /* ── icon box ── */
-        .sk-icon-box {
-          width: 42px; height: 42px;
-          border-radius: 11px;
-          display: flex; align-items: center; justify-content: center;
-          transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
-          flex-shrink: 0;
-        }
-        .sk-card:hover .sk-icon-box { transform: scale(1.1) rotate(-5deg); }
-
-        /* ── always learning card ── */
-        .sk-learning-card {
-          position: relative;
-          border-radius: 20px;
-          background: rgba(15,23,42,.55);
-          border: 1px solid rgba(51,65,85,.45);
-          backdrop-filter: blur(14px);
-          overflow: hidden;
-        }
-        .sk-learning-card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(56,189,248,.35), rgba(129,140,248,.25), transparent);
-        }
-
-        /* ── learning pill ── */
-        .sk-lpill {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 6px 16px;
-          border-radius: 99px;
-          font-size: 13px;
-          background: rgba(56,189,248,.08);
-          border: 1px solid rgba(56,189,248,.25);
-          color: rgba(125,211,252,1);
-          transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s cubic-bezier(.34,1.56,.64,1);
-          cursor: default;
-        }
-        .sk-lpill:hover {
-          background: rgba(56,189,248,.15);
-          border-color: rgba(56,189,248,.50);
-          transform: scale(1.07);
-        }
-        .sk-lpill-dot {
-          width: 5px; height: 5px;
-          border-radius: 50%;
-          background: #38bdf8;
-          animation: lpulse 2s ease-in-out infinite;
-        }
-        @keyframes lpulse {
-          0%,100% { opacity: 1; transform: scale(1); }
-          50%      { opacity: 0.5; transform: scale(0.8); }
-        }
-
-        /* eyebrow */
-        .sk-eyebrow {
-          display: inline-flex; align-items: center; gap: 8px;
-          padding: 5px 14px; border-radius: 99px;
-          background: rgba(15,23,42,.80);
-          border: 1px solid rgba(56,189,248,.22);
-          backdrop-filter: blur(8px);
-        }
-        .sk-eyebrow-dot {
-          width: 6px; height: 6px; border-radius: 50%;
-          background: linear-gradient(135deg, #38bdf8, #818cf8);
-        }
-
-        .sk-grid-bg {
-          background-image:
-            linear-gradient(to right,  #ffffff07 1px, transparent 1px),
-            linear-gradient(to bottom, #ffffff07 1px, transparent 1px);
-          background-size: 40px 40px;
-        }
+        .progress-ring-circle { transition: stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1); transform: rotate(-90deg); transform-origin: 50% 50%; }
       `}</style>
 
-      <section
-        id="skills"
-        ref={sectionRef}
-        className="sk-body py-28 bg-slate-950 relative overflow-hidden"
-      >
-        {/* ambient orbs */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/3 w-[480px] h-[480px] rounded-full blur-3xl"
-            style={{ background: "radial-gradient(circle, rgba(56,189,248,.07) 0%, transparent 70%)" }} />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full blur-3xl"
-            style={{ background: "radial-gradient(circle, rgba(192,132,252,.07) 0%, transparent 70%)" }} />
-        </div>
+      <section id="skills" ref={ref} className="sk-section">
+        <div className="sk-grid absolute inset-0 pointer-events-none" />
+        <div className="absolute top-0 left-1/3 w-[400px] h-[400px] rounded-full blur-3xl pointer-events-none" style={{ background: "radial-gradient(circle, rgba(13,148,136,.04), transparent 70%)" }} />
+        <div className="absolute bottom-0 right-1/4 w-[350px] h-[350px] rounded-full blur-3xl pointer-events-none" style={{ background: "radial-gradient(circle, rgba(245,158,11,.03), transparent 70%)" }} />
 
-        {/* grid */}
-        <div className="sk-grid-bg pointer-events-none absolute inset-0" />
-
-        <div className="relative z-10 max-w-6xl mx-auto px-6">
-
-          {/* ── Header ── */}
-          <div className={`sk-reveal sk-d1 ${sectionVisible ? "in" : ""} text-center mb-16`}>
-            <div className="sk-eyebrow mb-5 mx-auto w-fit">
-              <span className="sk-eyebrow-dot" />
-              <span className="text-xs text-slate-400 tracking-widest uppercase font-medium">
-                What I work with
-              </span>
+        <div className="relative z-10 max-w-6xl mx-auto px-8 md:px-16">
+          <div className={`text-center mb-16 ${visible ? "animate-[slide-up_1s_cubic-bezier(.22,1,.36,1)_0.2s_both]" : "opacity-0"}`}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-900/30 bg-emerald-950/30 backdrop-blur-sm mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span className="text-[10px] text-emerald-400/50 tracking-[0.2em] uppercase">What I work with</span>
             </div>
-            <h2 className="sk-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-b from-slate-100 to-slate-400">
-                Skills &{" "}
-              </span>
-              <span className="text-transparent bg-clip-text"
-                style={{ backgroundImage: "linear-gradient(135deg, #38bdf8 0%, #818cf8 60%, #c084fc 100%)" }}>
-                Technologies
-              </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+              <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(135deg, #0d9488, #14b8a6, #f59e0b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Skills &amp; Technologies</span>
             </h2>
-            <p className="mt-5 text-slate-500 max-w-xl mx-auto text-sm md:text-base leading-relaxed font-light">
-              A toolkit forged through years of hands-on experience and continuous learning
-              in the ever-evolving tech landscape.
-            </p>
+            <p className="text-zinc-500 max-w-xl mx-auto text-sm md:text-base leading-relaxed font-light mt-4">A toolkit forged through years of hands-on experience and continuous learning.</p>
           </div>
 
-          {/* ── Skill cards 2×2 ── */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {skillCategories.map(({ title, icon: IconComponent, accent, skills }, i) => (
-              <div
-                key={title}
-                className={`sk-reveal sk-d${i + 2} ${sectionVisible ? "in" : ""} sk-card p-7`}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = `${accent}0.38)`;
-                  e.currentTarget.style.boxShadow = `0 24px 48px ${accent}0.10)`;
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = "rgba(51,65,85,.50)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                {/* top-left glow patch */}
-                <div className="sk-card-glow"
-                  style={{ background: `radial-gradient(circle, ${accent}0.18) 0%, transparent 70%)` }} />
-
-                {/* card top border shimmer */}
-                <div className="sk-card::before" />
-                <div className="absolute top-0 left-0 right-0 h-px opacity-0 transition-opacity duration-300"
-                  style={{ background: `linear-gradient(90deg, transparent, ${accent}0.50), transparent)` }}
-                  ref={el => {
-                    if (el) {
-                      const card = el.closest(".sk-card");
-                      if (card) {
-                        card.addEventListener("mouseenter", () => el.style.opacity = "1");
-                        card.addEventListener("mouseleave", () => el.style.opacity = "0");
-                      }
-                    }
-                  }}
-                />
-
-                {/* header row */}
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="sk-icon-box"
-                    style={{ background: `${accent}0.10)`, border: `1px solid ${accent}0.22)` }}>
-                    <IconComponent className="w-5 h-5" style={{ color: `${accent}0.85)`.replace(/,[\d.]+\)$/, ")").replace("rgba", "rgb") }} />
+            {categories.map(({ title, icon: Icon, color, skills, progress }, i) => (
+              <div key={title} className={`sk-card ${visible ? "" : "opacity-0"}`} style={{ "--sk-color": color, animation: `slide-up 0.7s cubic-bezier(.22,1,.36,1) ${0.15 + i * 0.12}s both` }}>
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${color}15`, border: `1px solid ${color}25` }}>
+                    <Icon className="w-5 h-5" style={{ color }} />
                   </div>
-                  <h3 className="sk-display text-lg font-bold text-slate-100">{title}</h3>
-                  <span className="ml-auto text-xs text-slate-600 font-light tabular-nums">
-                    {skills.length} skills
-                  </span>
+                  <h3 className="text-sm font-bold text-white">{title}</h3>
+                  <span className="ml-auto text-[10px] text-zinc-600 font-light">{skills.length} skills</span>
                 </div>
-
-                {/* pill cluster */}
-                <div className="flex flex-wrap gap-2">
-                  {skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="sk-pill"
-                      onMouseEnter={e => {
-                        e.currentTarget.style.background = `${accent}0.12)`;
-                        e.currentTarget.style.borderColor = `${accent}0.38)`;
-                        e.currentTarget.style.color = `${accent}0.95)`.replace(/,[\d.]+\)$/, ")").replace("rgba", "rgb");
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.background = "rgba(30,41,59,.60)";
-                        e.currentTarget.style.borderColor = "rgba(51,65,85,.55)";
-                        e.currentTarget.style.color = "rgba(148,163,184,1)";
-                      }}
-                    >
-                      {skill}
-                    </span>
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {skills.map((s) => (
+                    <span key={s} className="skill-pill" onMouseEnter={e => { e.currentTarget.style.background = `${color}12`; e.currentTarget.style.borderColor = `${color}25`; e.currentTarget.style.color = `${color}cc`; }} onMouseLeave={e => { e.currentTarget.style.background = "rgba(30,41,59,.4)"; e.currentTarget.style.borderColor = "rgba(30,41,59,.5)"; e.currentTarget.style.color = "#64748b"; }}>{s}</span>
                   ))}
+                </div>
+                <div className="flex justify-center">
+                  <CircularSkill label={`${progress}%`} percentage={progress} color={color} />
                 </div>
               </div>
             ))}
           </div>
 
-          {/* ── Always Learning ── */}
-          <div className={`sk-reveal sk-d6 ${sectionVisible ? "in" : ""} mt-10 sk-learning-card p-8 md:p-10 text-center`}>
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <BookOpen className="w-4 h-4 text-sky-400/70" />
-              <p className="text-xs text-sky-400/70 tracking-widest uppercase font-medium">Always Learning</p>
+          <div className={`mt-10 sk-card p-6 text-center ${visible ? "animate-[slide-up_1s_cubic-bezier(.22,1,.36,1)_0.6s_both]" : "opacity-0"}`}>
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <BookOpen className="w-4 h-4 text-emerald-400/50" />
+              <p className="text-[10px] text-emerald-400/50 tracking-[0.2em] uppercase">Always Learning</p>
             </div>
-            <h3 className="sk-display text-2xl md:text-3xl font-bold text-slate-100 mb-3">
-              Staying ahead of{" "}
-              <span className="text-transparent bg-clip-text"
-                style={{ backgroundImage: "linear-gradient(135deg, #38bdf8, #818cf8)" }}>
-                the curve
-              </span>
-            </h3>
-            <p className="text-slate-500 text-sm max-w-lg mx-auto mb-7 font-light leading-relaxed">
-              Technology evolves rapidly — and so do I. Currently deepening expertise in
-              AI/ML, data engineering, and advanced cloud architectures.
-            </p>
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-3">Staying ahead of the curve</h3>
+            <p className="text-zinc-500 text-sm max-w-lg mx-auto mb-5 font-light leading-relaxed">Technology evolves rapidly — and so do I. Currently deepening expertise in AI/ML, data engineering, and cloud architectures.</p>
             <div className="flex flex-wrap justify-center gap-3">
-              {learningSkills.map((tag) => (
-                <span key={tag} className="sk-lpill">
-                  <span className="sk-lpill-dot" />
-                  {tag}
-                </span>
+              {learning.map((tag) => (
+                <span key={tag} className="learn-pill"><span className="learn-dot" />{tag}</span>
               ))}
             </div>
           </div>
-
         </div>
       </section>
     </>
